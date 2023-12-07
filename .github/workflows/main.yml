@@ -55,7 +55,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd home
-            sudo mv * /var/www/html
             docker pull shulinz/clcm3504finalexam:latest
             docker run -d -p 5555:80 shulinz/clcm3504finalexam:latest
+            cd home
+            sudo mv * /var/www/html
