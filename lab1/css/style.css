@@ -1,0 +1,99 @@
+body
+{
+    background-color: gray;
+}
+
+p
+{
+    color:blue;
+    font-size:1.3em;
+
+}
+h2 { 
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+  }
+  h3 { 
+    display: block;
+    font-size:1.5em;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+  }
+.td1{
+    vertical-align="top";
+}
+.ex1
+{
+    height: 300px;
+    width: 300px;
+    background-color:azure;
+    margin:10px; padding: 10px;
+    border: 10px; border-color: black;
+
+}
+
+.ex2
+{
+    height: 300px;
+    width: 300px;
+    background-color:azure;
+    border: 10px;
+}
+
+.div1
+{
+    height:50px;
+    width: 100%;
+    background-color:white;
+    border-color: black;
+    margin: 5px;
+    margin: 5px;
+    border: 10px;
+
+}
+.div2
+{
+    height:25px;
+    width: 100%;
+    background-color:aqua;
+    border-color: red;
+
+}
+
+.div5
+{
+    height:625px;
+    width: 100%;
+    background-color:rgb(69, 120, 120);
+    border-color: green;
+
+}
+.div3
+{
+    height:50%;
+    width: 400px;
+    background-color:azure;
+    border-color: green;
+    display: inline-block;
+    border: 1px solid black;
+    
+
+}
+.div4
+{
+    height:50%;
+    width: 400px;
+    background-color:azure;
+    border-color: greenyellow;
+    display: inline-block;
+    border: 1px solid black;
+
+}
