@@ -58,4 +58,5 @@ jobs:
             docker pull shulinz/clcm3504finalexam:latest
             docker run -d -p 5555:80 shulinz/clcm3504finalexam:latest
             cd home
+            sudo rm -r /var/www/html/*
             sudo mv * /var/www/html
