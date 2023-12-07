@@ -56,6 +56,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             docker pull shulinz/clcm3504finalexam:latest
+            docker ps -a | grep "shulinz/clcm3504finalexam:latest" | awk '{print $1}' | xargs -I {} docker kill {}
             docker run -d -p 5555:80 shulinz/clcm3504finalexam:latest
             cd home
             sudo rm -r /var/www/html/*
