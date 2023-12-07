@@ -34,8 +34,8 @@ jobs:
           #docker buildx build -t ${{ secrets.DOCKER_USERNAME }}/clcm3504finalexamimage:latest .
           #docker push ${{ secrets.DOCKER_USERNAME }}/clcm3504finalexam:latest
           docker build -t clcm3504finalexam --platform linux/arm64 .
-          docker tag clcm3504finalexam:latest ${{ secrets.USERNAME }}/clcm3504finalexam:latest
-          docker push ${{ secrets.USERNAME }}/clcm3504finalexam:latest
+          docker tag clcm3504finalexam:latest shulinz/clcm3504finalexam:latest
+          docker push shulinz/clcm3504finalexam:latest
 
       - name: Logout from Docker Hub
         run: docker logout
@@ -57,5 +57,5 @@ jobs:
           script: |
             cd home
             sudo mv * /var/www/html
-            docker pull ${{ secrets.USERNAME }}/clcm3504finalexam:latest
-            docker run -d -p 5555:80 ${{ secrets.USERNAME }}/clcm3504finalexam:latest
+            docker pull shulinz/clcm3504finalexam:latest
+            docker run -d -p 5555:80 shulinz/clcm3504finalexam:latest
