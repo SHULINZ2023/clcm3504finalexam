@@ -1,0 +1,61 @@
+name: Deploy to EC2 Apache, Build, and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Build Website
+        run: |
+          # no real build required, as it is a simple static web
+          echo "Building website..."
+      - name: Dummy test Website
+        run: |
+          # no real test, as it is a simple static web
+          echo "Testing website..."
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker buildx create --use
+          docker buildx inspect --bootstrap
+          #docker buildx build -t ${{ secrets.DOCKER_USERNAME }}/clcm3504finalexamimage:latest .
+          #docker push ${{ secrets.DOCKER_USERNAME }}/clcm3504finalexam:latest
+          docker build -t clcm3504finalexam --platform linux/arm64 .
+          docker tag clcm3504finalexam:latest ${{ secrets.USERNAME }}/clcm3504finalexam:latest
+          docker push ${{ secrets.USERNAME }}/clcm3504finalexam:latest
+
+      - name: Logout from Docker Hub
+        run: docker logout
+
+      - name: Deploy docker image to EC2
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd home
+            sudo mv * /var/www/html
+            docker pull ${{ secrets.USERNAME }}/clcm3504finalexam:latest
+            docker run -d -p 5555:80 ${{ secrets.USERNAME }}/clcm3504finalexam:latest
